@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Keyboard,
+  Alert,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import Header from './components/header';
 import Persons from './components/Persons';
+import AddPerson from './components/AddPerson';
 
 
 const App = () => {
@@ -13,30 +21,62 @@ const App = () => {
     { name: "Roy Jafarii", key: "4" },
   ])
 
-  const pressHandler = key =>{
-    setPersons(prevPersons=> prevPersons.filter(p=> p.key !== key))
+
+  const [person, setPerson] = useState("")
+
+  const pressHandler = key => {
+    setPersons(prevPersons => prevPersons.filter(p => p.key !== key))
+  }
+
+
+  const submitHandler = () => {
+    if (person.length > 3) {
+      setPersons((prevPersons) => [
+        ...prevPersons,
+        {
+          name: person,
+          key: Math.floor(Math.random() * 1000).toString()
+        }
+      ])
+      setPerson("")
+      Keyboard.dismiss()
+    } else {
+      Alert.alert("Alterttt!!!", "Name must be grater than 3 ", [
+        {
+          text: "undrestand",
+          onPress: () => console.log("Alert close")
+        }
+      ])
+    }
+
   }
   return (
-    <View style={styles.container}>
-      <Header />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Header />
 
 
-      <View style={styles.body}>
-        {/* Add Person */}
-        <View style={styles.items}>
-          <FlatList
-            data={persons}
-            renderItem={({ item }) => (
-              <Persons
-                person={item}
-                pressHandler={pressHandler}
-              />
-            )}
+        <View style={styles.body}>
+          <AddPerson
+            submitHandler={submitHandler}
+            setPerson={setPerson}
+            person={person}
           />
+          <View style={styles.items}>
+            <FlatList
+              data={persons}
+              renderItem={({ item }) => (
+                <Persons
+                  person={item}
+                  pressHandler={pressHandler}
+                />
+              )}
+            />
 
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
