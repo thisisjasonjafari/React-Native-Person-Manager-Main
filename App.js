@@ -10,15 +10,16 @@ import {
 import Header from './components/header';
 import Persons from './components/Persons';
 import AddPerson from './components/AddPerson';
+import Playgound from './components/playground';
 
 
 const App = () => {
 
   const [persons, setPersons] = useState([
-    { name: "Jason Jafari", key: "1" },
-    { name: "Sara RekabTalaei", key: "2" },
-    { name: "Majid Bayati", key: "3" },
-    { name: "Roy Jafarii", key: "4" },
+    { name: "Jason Jafari", key: "1", compleded: false },
+    { name: "Sara RekabTalaei", key: "2", compleded: false },
+    { name: "Majid Bayati", key: "3", compleded: false },
+    { name: "Roy Jafarii", key: "4", compleded: false },
   ])
 
 
@@ -28,6 +29,15 @@ const App = () => {
     setPersons(prevPersons => prevPersons.filter(p => p.key !== key))
   }
 
+  const completedHandler = (key) => {
+    const allPersons = [...persons]
+    const personIndex = allPersons.findIndex(p => p.key == key)
+    const person = allPersons[personIndex]
+    person.compleded = !person.compleded
+    allPersons[personIndex] = person
+    setPersons(allPersons)
+  }
+
 
   const submitHandler = () => {
     if (person.length > 3) {
@@ -35,7 +45,8 @@ const App = () => {
         ...prevPersons,
         {
           name: person,
-          key: Math.floor(Math.random() * 1000).toString()
+          key: Math.floor(Math.random() * 1000).toString(),
+          compleded: false
         }
       ])
       setPerson("")
@@ -51,6 +62,9 @@ const App = () => {
 
   }
   return (
+
+    // <Playgound />
+
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <Header />
@@ -69,6 +83,7 @@ const App = () => {
                 <Persons
                   person={item}
                   pressHandler={pressHandler}
+                  completedHandler={completedHandler}
                 />
               )}
             />
@@ -77,6 +92,8 @@ const App = () => {
         </View>
       </View>
     </TouchableWithoutFeedback>
+
+
   );
 }
 
@@ -89,8 +106,11 @@ const styles = StyleSheet.create({
   },
   body: {
     padding: 40,
+    backgroundColor: "white",
+    flex: 1
   },
   items: {
     marginTop: 20,
+    flex: 1
   }
 })
