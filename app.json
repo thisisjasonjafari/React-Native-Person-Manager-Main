@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AwesomeProject",
-    "slug": "AwesomeProject",
+    "name": "React-Native-Person-Manager-Main",
+    "slug": "react-native-person-manager-main",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/thisisjasonjafari/React-Native-Person-Manager-Main"
   }
 }
