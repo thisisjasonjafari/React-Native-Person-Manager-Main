@@ -8,13 +8,15 @@
             "web"
         ],
         "version": "1.0.0",
-        "ios": {
-            "bundleIdentifier": "com.jasonjafari.personmanagerapp",
-            "buildNumber": "1.0.0"
-        },
+
         "android": {
             "package": "com.jasonjafari.personmanagerapp",
             "versionCode": 1
+        },
+        "ios": {
+            "bundleIdentifier": "com.jasonjafari.personmanagerapp",
+            "buildNumber": "1.0.1",
+            "supportsTablet": true
         },
         "orientation": "portrait",
         "icon": "./assets/icon.png",
@@ -29,9 +31,7 @@
         "assetBundlePatterns": [
             "**/*"
         ],
-        "ios": {
-            "supportsTablet": true
-        },
+
         "description": "",
         "githubUrl": "https://github.com/thisisjasonjafari/React-Native-Person-Manager-Main"
     }
