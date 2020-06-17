@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
 import {
   StyleSheet,
   View,
@@ -13,6 +15,15 @@ import AddPerson from './components/AddPerson';
 import Playgound from './components/playground';
 
 
+const getFonts = () => {
+  return Font.loadAsync({
+      "yekan": require("./assets/fonts/byekan.ttf"),
+      "yekan-bold": require("./assets/fonts/byekan.ttf"),
+  });
+};
+
+
+
 const App = () => {
 
   const [persons, setPersons] = useState([
@@ -24,7 +35,7 @@ const App = () => {
 
 
   const [person, setPerson] = useState("")
-
+  const [fontLoading, setFontLoading] = useState(false);
   const pressHandler = key => {
     setPersons(prevPersons => prevPersons.filter(p => p.key !== key))
   }
@@ -61,40 +72,50 @@ const App = () => {
     }
 
   }
-  return (
+  if(fontLoading){
+    return (
 
-    // <Playgound />
-
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <Header />
-
-
-        <View style={styles.body}>
-          <AddPerson
-            submitHandler={submitHandler}
-            setPerson={setPerson}
-            person={person}
-          />
-          <View style={styles.items}>
-            <FlatList
-              data={persons}
-              renderItem={({ item }) => (
-                <Persons
-                  person={item}
-                  pressHandler={pressHandler}
-                  completedHandler={completedHandler}
-                />
-              )}
+      // <Playgound />
+  
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Header />
+  
+  
+          <View style={styles.body}>
+            <AddPerson
+              submitHandler={submitHandler}
+              setPerson={setPerson}
+              person={person}
             />
-
+            <View style={styles.items}>
+              <FlatList
+                data={persons}
+                renderItem={({ item }) => (
+                  <Persons
+                    person={item}
+                    pressHandler={pressHandler}
+                    completedHandler={completedHandler}
+                  />
+                )}
+              />
+  
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
-
-
-  );
+      </TouchableWithoutFeedback>
+  
+  
+    );
+  }else {
+    return (
+        <AppLoading
+            startAsync={getFonts}
+            onFinish={() => setFontLoading(true)}
+        />
+    );
+}
+ 
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, TextInput, Button } from 'react-native';
-
+import { View, TextInput, Button } from 'react-native';
+import { styles } from './styles/globalStyle'
 
 
 
@@ -11,7 +11,7 @@ const AddPerson = ({ submitHandler, setPerson, person }) => {
         style={styles.input}
         placeholder="New Name ...."
         placeholderTextColor="darkgrey"
-        onChangeText={setPerson }
+        onChangeText={setPerson}
         value={person}
 
       />
@@ -27,15 +27,3 @@ const AddPerson = ({ submitHandler, setPerson, person }) => {
 }
 
 export default AddPerson;
-
-const styles = StyleSheet.create({
-  input: {
-    marginBottom: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: "orange",
-    fontSize: 15,
-
-  }
-})

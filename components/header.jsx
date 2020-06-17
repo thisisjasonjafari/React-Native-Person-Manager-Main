@@ -1,29 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native'
+import { View, Text } from 'react-native'
+import { styles } from './styles/globalStyle'
 
 const Header = () => {
   return (
     <View style={styles.header}>
       <Text style={styles.title}>
-        Persons Manager
+        مدیریت کننده اشخاص
       </Text>
     </View>
   );
 }
 
 export default Header;
-
-const styles = StyleSheet.create({
-  header: {
-    height: 80,
-    paddingTop: 40,
-    backgroundColor: "orangered"
-  },
-  title: {
-   
-    textAlign: "center",
-    color: "white",
-    fontSize: 25,
-    fontWeight: "bold"
-  }
-})

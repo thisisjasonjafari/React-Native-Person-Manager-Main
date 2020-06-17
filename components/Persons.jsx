@@ -1,6 +1,7 @@
-,import React from 'react'
+import React from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
+import {styles} from './styles/globalStyle'
 
 const Persons = ({ person, pressHandler, completedHandler }) => {
   return (
@@ -22,24 +23,3 @@ const Persons = ({ person, pressHandler, completedHandler }) => {
 }
 
 export default Persons;
-
-const styles = StyleSheet.create({
-  person: {
-    padding: 20,
-    marginTop: 15,
-    borderWidth: 2,
-    borderColor: "orangered",
-    borderRadius: 20,
-    // borderStyle:"dashed",
-    flexDirection: "row-reverse",
-    justifyContent: "space-between"
-
-  },
-  personName: {
-
-    textAlign: "center",
-    fontSize: 17,
-    fontWeight: "bold"
-  }
-
-})
